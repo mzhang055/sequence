@@ -1,14 +1,14 @@
 {
-  "name": "sequence",
+  "name": "trace",
   "version": "1.0.0",
-  "description": "Terminal code visualizer for Python loops and arrays",
-  "homepage": "https://github.com/mzhang055/sequence#readme",
+  "description": "Terminal code visualizer for Python recursive functions and algorithms",
+  "homepage": "https://github.com/mzhang055/trace#readme",
   "bugs": {
-    "url": "https://github.com/mzhang055/sequence/issues"
+    "url": "https://github.com/mzhang055/trace/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mzhang055/sequence.git"
+    "url": "git+https://github.com/mzhang055/trace.git"
   },
   "license": "ISC",
   "author": "",
@@ -18,8 +18,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
-    "sequence": "bin/index.js",
-    "cviz": "bin/index.js"
+    "trace": "bin/index.js",
+    "sequence": "bin/index.js"
   },
   "dependencies": {
     "blessed": "^0.1.81",
