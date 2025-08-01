@@ -1,0 +1,27 @@
+{
+  "name": "sequence",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/mzhang055/sequence#readme",
+  "bugs": {
+    "url": "https://github.com/mzhang055/sequence/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mzhang055/sequence.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "bin/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "sequence": "bin/index.js"
+  },
+  "dependencies": {
+    "blessed": "^0.1.81",
+    "yargs": "^18.0.0"
+  }
+}
