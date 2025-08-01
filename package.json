@@ -1,7 +1,7 @@
 {
   "name": "sequence",
   "version": "1.0.0",
-  "description": "",
+  "description": "Terminal code visualizer for Python loops and arrays",
   "homepage": "https://github.com/mzhang055/sequence#readme",
   "bugs": {
     "url": "https://github.com/mzhang055/sequence/issues"
