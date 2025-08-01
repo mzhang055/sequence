@@ -63,16 +63,27 @@ class ExecutionEngine {
           conditionResult: null,
           step: 'init'
         });
+        this.currentStep++;
         break;
         
       case 'for_start':
-        this.isInLoop = true;
-        this.loopIndex = 0;
-        this.executeLoop();
-        return true;
+        if (!this.isInLoop) {
+          this.isInLoop = true;
+          this.loopIndex = 0;
+        }
+        
+        if (this.loopIndex < this.loopMax) {
+          this.executeLoopIteration();
+          this.loopIndex++;
+          
+          if (this.loopIndex >= this.loopMax) {
+            this.isInLoop = false;
+            this.currentStep++;
+          }
+        }
+        break;
     }
     
-    this.currentStep++;
     return true;
   }
 
