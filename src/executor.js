@@ -87,29 +87,24 @@ class ExecutionEngine {
     return true;
   }
 
-  executeLoop() {
-    while (this.loopIndex < this.loopMax) {
-      const conditionStep = this.steps.find(s => s.type === 'condition');
-      const operationStep = this.steps.find(s => s.type === 'operation');
+  executeLoopIteration() {
+    const conditionStep = this.steps.find(s => s.type === 'condition');
+    const operationStep = this.steps.find(s => s.type === 'operation');
+    
+    let conditionResult = true;
+    if (conditionStep) {
+      conditionResult = this.evaluateCondition(conditionStep.condition);
       
-      if (conditionStep) {
-        const conditionResult = this.evaluateCondition(conditionStep.condition);
-        
-        if (conditionResult && operationStep) {
-          this.executeOperation(operationStep.operation);
-        }
+      if (conditionResult && operationStep) {
+        this.executeOperation(operationStep.operation);
       }
-      
-      this.loopIndex++;
-      this.executionTrace.push({
-        loopIndex: this.loopIndex - 1,
-        array: [...this.array],
-        conditionResult: conditionStep ? this.evaluateCondition(conditionStep.condition) : true
-      });
     }
     
-    this.isInLoop = false;
-    this.currentStep++;
+    this.executionTrace.push({
+      loopIndex: this.loopIndex,
+      array: [...this.array],
+      conditionResult: conditionStep ? conditionResult : true
+    });
   }
 
   evaluateCondition(condition) {
@@ -143,7 +138,7 @@ class ExecutionEngine {
   }
 
   isComplete() {
-    return this.currentStep >= this.steps.length;
+    return this.currentStep >= this.steps.length && !this.isInLoop;
   }
 
   getExecutionTrace() {
