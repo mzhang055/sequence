@@ -4,7 +4,7 @@ const yargs = require("yargs");
 const path = require("path");
 const TerminalUI = require("../src/ui");
 
-const argv = yargs
+const argv = yargs(process.argv.slice(2))
   .usage('Usage: $0 <file> [options]')
   .command('$0 <file>', 'Visualize Python code execution', (yargs) => {
     yargs.positional('file', {

@@ -160,19 +160,29 @@ class TerminalUI {
   }
 
   render() {
-    this.executor.stepForward();
+    if (this.executor.getExecutionTrace().length === 0) {
+      this.executor.stepForward();
+    }
+    
     const trace = this.executor.getExecutionTrace();
     
     let currentArray = [...this.executor.initialArray];
     let currentIndex = -1;
+    let currentLine = -1;
     
     if (trace.length > 0 && this.currentTraceIndex < trace.length) {
       const currentTrace = trace[this.currentTraceIndex];
       currentArray = currentTrace.array;
-      currentIndex = currentTrace.loopIndex;
+      currentIndex = currentTrace.loopIndex >= 0 ? currentTrace.loopIndex : -1;
+      
+      if (currentTrace.step === 'init') {
+        currentLine = 0;
+      } else if (currentIndex >= 0) {
+        currentLine = 2;
+      }
     }
 
-    const codeContent = this.visualizer.renderCode(this.parseResult.lines, -1);
+    const codeContent = this.visualizer.renderCode(this.parseResult.lines, currentLine);
     const arrayContent = this.visualizer.renderArray(currentArray, currentIndex);
     
     let controlsContent = this.visualizer.renderControls();
@@ -181,7 +191,14 @@ class TerminalUI {
     } else {
       controlsContent = '[PAUSED] ' + controlsContent;
     }
-    controlsContent += `\nStep: ${this.currentTraceIndex}/${trace.length}`;
+    controlsContent += `\nStep: ${this.currentTraceIndex + 1}/${trace.length}`;
+    
+    if (trace.length > 0 && this.currentTraceIndex < trace.length) {
+      const currentTrace = trace[this.currentTraceIndex];
+      if (currentTrace.conditionResult !== null) {
+        controlsContent += `\nCondition: ${currentTrace.conditionResult ? 'TRUE' : 'FALSE'}`;
+      }
+    }
 
     this.codeBox.setContent(codeContent);
     this.visualBox.setContent(arrayContent);

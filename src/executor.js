@@ -57,6 +57,12 @@ class ExecutionEngine {
       case 'init':
         this.array = [...step.array];
         this.variables[step.varName] = [...step.array];
+        this.executionTrace.push({
+          loopIndex: -1,
+          array: [...this.array],
+          conditionResult: null,
+          step: 'init'
+        });
         break;
         
       case 'for_start':

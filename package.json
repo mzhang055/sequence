@@ -18,7 +18,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
-    "sequence": "bin/index.js"
+    "sequence": "bin/index.js",
+    "cviz": "bin/index.js"
   },
   "dependencies": {
     "blessed": "^0.1.81",
